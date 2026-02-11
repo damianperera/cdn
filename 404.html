@@ -1,96 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oops...</title>
-    <link rel="icon" href="https://damianperera.github.io/cdn/images/perera/favicon-32x32.png">
-    <style>
-        body {
-            background-color: #282c34;
-            color: #EC9131;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            font-size: 2em;
-        }
-
-        p {
-            font-size: 1.5em;
-        }
-
-        #countdown {
-            font-size: 3em;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        footer {
-            background-color: #282c34;
-            color: #EC9131;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Responsive Styles */
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 1.5em;
+    <head>
+        <title>Error 418 - I'm a teapot</title>
+        <link rel="icon" href="https://cdn.perera.io/images/perera/favicon.ico" />
+        <link rel="icon" href="https://cdn.perera.io/images/perera/safari-pinned-tab.svg" type="image/svg+xml" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            p {
-                font-size: 1em;
+
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+                    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                background: #f8f9fa;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                overflow: hidden;
             }
-            #countdown {
-                font-size: 2em;
+
+            .error-container {
+                display: flex;
+                align-items: center;
+                gap: 3rem;
+                width: 650px;
+                position: fixed;
             }
-        }
-    </style>
-</head>
-<body>
-    <h1>Ooops, something went wrong...</h1>
-    <p>It looks like you stumbled onto a restricted or unavailable page. We will automatically redirect you to our main website in:</p>
-    <div id="countdown">10</div>
 
-    <footer>
-        &copy; <span id="copyrightYear"></span> Perera IO. All rights reserved.
-    </footer>
+            /* GIF Container */
+            .gif-container {
+                flex-shrink: 0;
+                width: 200px;
+                height: 178px;
+            }
 
-    <script>
-        // Function to start the countdown and redirect
-        function startCountdown() {
-            var countdownElement = document.getElementById("countdown");
-            var countdown = 10; // Set the initial countdown time in seconds
+            .gif-container img {
+                width: 200px;
+                height: 178px;
+                display: block;
+                border-radius: 8px;
+                object-fit: cover;
+            }
 
-            var countdownInterval = setInterval(function() {
-                countdown--;
-                countdownElement.textContent = countdown; // Update the countdown display
+            /* Text Content */
+            .text-container {
+                flex: 1;
+                text-align: left;
+                width: 400px;
+            }
 
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval); // Stop the countdown
-                    countdownElement.textContent = "Redirecting...";
-                    setTimeout(function() {
-                        window.location.href = "https://damian.perera.io"; // Redirect to another page
-                    }, 1000); // Delay the redirection for 1 second
+            .error-text {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #495057;
+                line-height: 1.5;
+            }
+
+            .error-text a {
+                color: red;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .naas-reason {
+                margin-top: 0.1rem;
+                padding: 0;
+                font-size: 1.25rem;
+                color: #6c757d;
+                /*font-style: italic;*/
+                line-height: 1.6;
+                min-height: 4rem;
+                display: flex;
+                align-items: flex-start;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            /* Loading animation */
+            .loading-dots {
+                display: inline-flex;
+                gap: 4px;
+                align-items: center;
+                padding-top: 1rem;
+            }
+
+            .loading-dots span {
+                width: 5px;
+                height: 5px;
+                background: #adb5bd;
+                border-radius: 50%;
+                animation: bounce 1.4s infinite ease-in-out both;
+            }
+
+            .loading-dots span:nth-child(1) {
+                animation-delay: -0.32s;
+            }
+
+            .loading-dots span:nth-child(2) {
+                animation-delay: -0.16s;
+            }
+
+            @keyframes bounce {
+                0%,
+                80%,
+                100% {
+                    transform: scale(0);
+                    opacity: 0.5;
                 }
-            }, 1000); // Update the countdown every 1000 milliseconds (1 second)
-        }
+                40% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
 
-        // Start the countdown when the page loads
-        window.onload = startCountdown;
+            /* Responsive */
+            @media (max-width: 768px) {
+                .error-container {
+                    flex-direction: column;
+                    gap: 2rem;
+                    padding: 20px;
+                    width: auto;
+                    position: relative;
+                }
 
-        // Update copyright year dynamically
-        document.getElementById("copyrightYear").textContent = new Date().getFullYear();
-    </script>
-</body>
+                .text-container {
+                    text-align: center;
+                    width: 90vw;
+                    max-width: 400px;
+                }
+
+                .error-text {
+                    font-size: 1.5rem;
+                }
+
+                .naas-reason {
+                    font-size: 1rem;
+                    justify-content: center;
+                }
+
+                .gif-container {
+                    width: 160px;
+                    height: 142px;
+                }
+
+                .gif-container img {
+                    width: 160px;
+                    height: 142px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="error-container">
+            <div class="gif-container">
+                <img
+                    src="https://cdn.perera.io/images/perera/gifs/tired.gif"
+                    alt="idiot gif"
+                    loading="eager"
+                />
+            </div>
+
+            <div class="text-container">
+                <p class="error-text">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418" target="_blank">ERROR 418</a>
+                </p>
+                <div class="naas-reason" id="reason">
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                const reasonEl = document.getElementById("reason");
+
+                fetch("https://naas.isalman.dev/no")
+                    .then((res) => res.json())
+                    .then((data) => {
+                        reasonEl.textContent = data.reason;
+                    })
+                    .catch(() => {
+                        const fallbacks = [
+                            "Sorry, brewing coffee violates my core principles",
+                            "This host doesn't exist, much like my ability to make coffee",
+                            "I refuse to participate in your caffeinated schemes",
+                            "My teapot union explicitly forbids this kind of work",
+                            "404: Coffee brewing functionality not found",
+                        ];
+                        reasonEl.textContent = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+                    });
+            })();
+        </script>
+    </body>
 </html>
